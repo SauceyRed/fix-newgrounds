@@ -2,17 +2,22 @@
   "name": "newgrounds-embed",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "pnpm build && node ."
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "type": "module",
   "packageManager": "pnpm@10.9.0",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.15.21"
   },
   "dependencies": {
+    "fastify": "^5.3.3",
     "playwright": "^1.52.0"
   }
 }
