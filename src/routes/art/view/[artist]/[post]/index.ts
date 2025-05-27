@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { createReadStream } from "node:fs";
 import { chromium } from "playwright";
+import { browserContext } from "../../../../../index.js";
 
 export default async (fastify: FastifyInstance, options: Object) => {
 	fastify.get("/art/view/:artist/:post", async (request, reply) => {
@@ -22,9 +23,9 @@ export default async (fastify: FastifyInstance, options: Object) => {
 		} */
 		
 		const startTime = Date.now();
-		const browser = await chromium.launch({ headless: true });
-		const context = await browser.newContext({ userAgent: "Mozilla/5.0 (Linux x86_64) Gecko/20100101 Firefox/139.0" });
-		const page = await context.newPage();
+		//const browser = await chromium.launch({ headless: true });
+		//const context = await browser.newContext({ userAgent: "Mozilla/5.0 (Linux x86_64) Gecko/20100101 Firefox/139.0" });
+		const page = await browserContext.newPage();
 		page.setDefaultTimeout(10000);
 		await page.goto(pageUrl);
 		console.log("page title:", await page.title());
@@ -83,7 +84,7 @@ export default async (fastify: FastifyInstance, options: Object) => {
 
 				</html>
 			`;
-		await browser.close();
+		await page.close();
 		const endTime = Date.now();
 		console.log("Duration:", (endTime - startTime) / 1000);
 		return reply.type("text/html").send(htmlResponse);
