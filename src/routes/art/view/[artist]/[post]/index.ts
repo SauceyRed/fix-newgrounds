@@ -48,6 +48,18 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			const score = "⭐ " + (await stats[3].locator("#score_number").textContent({ timeout: 500 })) + " / 5.00";
 			const uploaded = (await stats[4].textContent({ timeout: 500 })) + " " + (await stats[5].textContent({ timeout: 500 }));
 			const statsText = `${views} ${faves} ${votes} ${score}`;
+			
+			let description = "";
+			if (comments) {
+				description = `${comments}\n\n${statsText}`;
+			} else {
+				description = statsText;
+			}
+
+			if (uploaded) {
+				description += `\n${uploaded}`;
+			}
+
 			console.log("oembed url:", `${request.protocol}://${request.host}${path.split("?")[0]}/oembed.json`);
 			const oembedUrl = new URL(`${request.protocol}://${request.host}/oembed`);
 			if (author) oembedUrl.searchParams.set("title", author.toLowerCase());
@@ -58,7 +70,7 @@ export default async (fastify: FastifyInstance, options: Object) => {
 					<head>
 						<link rel="canonical" href="${pageUrl}" />
 						<meta property="og:title" content="${title}" />
-						<meta property="og:description" content="${comments ? comments + '\n\n' + statsText : statsText}" />
+						<meta property="og:description" content="${description}" />
 						<meta property="og:url" content="${pageUrl}" />
 						<meta property="og:image" content="${image}" />
 						<meta property="og:site_name" content="FixNewgrounds" />
