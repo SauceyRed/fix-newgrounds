@@ -15,11 +15,17 @@ Once you've done that, ensure you have pnpm installed:
 ```bash
 npm i -g pnpm
 ```
-Then run the following commands inside the project's directory:
+Then run the following command inside the project's directory:
 ```bash
 pnpm i
-pnpm start
 ```
+After that, you'll have to install the Chromium browser for Playwright.  
+If you're on a Debian-based distro (using apt), you can just run:
+```bash
+pnpx playwright install chromium
+```
+If you're on Fedora, follow [this guide](https://gist.github.com/pskopek/de9d79cf0511839dd5c97703be5cc624).
+
 Next, you'll wanna have an HTTP client installed, such as [Postman](https://www.postman.com/),
 [Insomnnia](https://insomnia.rest/), etc.  
 Alternatively you could just use `curl`.
