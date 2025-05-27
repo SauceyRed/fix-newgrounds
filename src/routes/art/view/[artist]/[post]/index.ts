@@ -57,7 +57,7 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			}
 
 			if (uploaded) {
-				description += `\n${uploaded}`;
+				description += `\n\n${uploaded}`;
 			}
 
 			console.log("oembed url:", `${request.protocol}://${request.host}${path.split("?")[0]}/oembed.json`);
