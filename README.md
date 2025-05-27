@@ -64,6 +64,14 @@ If you try to send a request to that `alternate` URL, you should get something l
     "author_url": "https://4WK.newgrounds.com/"
 }
 ```
+**NOTE: If you want it to embed posts that require an account to view, you must
+first run the following command:**
+```bash
+pnpm signin
+```
+**This will open a browser. Once you've logged in, you can safely close the browser
+and exit the program (`ctrl+c`). Then you can run `pnpm start` as normal.**
+
 That's it!  
 If you have any more questions, feel free to reach out
 or make an [Issue](https://github.com/SauceyRed/fix-newgrounds/issues/new/choose).
