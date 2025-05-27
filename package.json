@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+	"signin": "pnpm build && node dist/setup.js",
     "start": "pnpm build && node ."
   },
   "keywords": [],
