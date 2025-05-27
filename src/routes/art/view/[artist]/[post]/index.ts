@@ -13,18 +13,8 @@ export default async (fastify: FastifyInstance, options: Object) => {
 		if (!request.headers["user-agent"]?.includes("Discordbot")) {
 			return await reply.redirect(pageUrl);
 		}
-
-/* 		if (!(request.query as any).cb) {
-			console.log("url:", `${request.protocol}://${request.host}${path}`);
-			const url = new URL(`${request.protocol}://${request.host}${path}`);
-			url.searchParams.set("cb", Date.now().toString());
-			console.log("cb:", url.searchParams.get("cb"));
-			return await reply.redirect(url.href);
-		} */
 		
 		const startTime = Date.now();
-		//const browser = await chromium.launch({ headless: true });
-		//const context = await browser.newContext({ userAgent: "Mozilla/5.0 (Linux x86_64) Gecko/20100101 Firefox/139.0" });
 		const page = await browserContext.newPage();
 		try {
 
