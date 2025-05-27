@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+import root from "./routes/index.js";
 import post from "./routes/art/view/[artist]/[post]/index.js";
 import oembed from "./routes/oembed.js";
 import { chromium } from "playwright";
@@ -12,6 +13,7 @@ async function main() {
 		logger: true
 	});
 
+	fastify.register(root);
 	fastify.register(post);
 	fastify.register(oembed);
 
