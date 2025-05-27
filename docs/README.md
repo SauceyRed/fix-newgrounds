@@ -78,6 +78,11 @@ pnpm signin
 **This will open a browser. Once you've logged in, you can safely close the browser
 and exit the program (`ctrl+c`). Then you can run `pnpm start` as normal.**
 
+If you want to test your local version on Discord, you'll need to expose the server
+to the internet. For that, you could either use any web server like nginx, apache, caddy, etc.,
+or a tunnel through something like [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
+or [ngrok](https://ngrok.com/docs/getting-started/).
+
 That's it!  
 If you have any more questions, feel free to reach out
 or make an [Issue](https://github.com/SauceyRed/fix-newgrounds/issues/new/choose).
