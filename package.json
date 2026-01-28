@@ -15,7 +15,8 @@
   "packageManager": "pnpm@10.9.0",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.21"
+    "@types/node": "^22.15.21",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "fastify": "^5.3.3",
