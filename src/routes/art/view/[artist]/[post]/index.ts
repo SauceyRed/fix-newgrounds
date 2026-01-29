@@ -30,9 +30,15 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			console.log("Author:", author);
 			const authorUrl = `https://${author}.newgrounds.com/`;
 			console.log("Getting author comments...");
-			let comments;
+			let comments = "";
 			try {
-				comments = await page.locator("#author_comments").textContent({ timeout: 500 });
+				const paragraphElements = await page.locator("#author_comments p").all()
+				const paragraphs: String[] = [];
+				for (const p of paragraphElements) {
+					const text = await p.textContent({ timeout: 500 });
+					if (text) paragraphs.push(text);
+				}
+				comments = paragraphs.join("\n");
 			} catch (error) {
 				fastify.log.error("Failed to get author comments:", error);
 			}
