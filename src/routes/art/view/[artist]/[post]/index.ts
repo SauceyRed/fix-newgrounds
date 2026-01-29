@@ -41,7 +41,7 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			const image = await page.locator(".pod-body").first().locator("a").first().getAttribute("href");
 			console.log("Image source:", image);
 			console.log("Getting score...");
-			const stats = await page.locator("dd").all();
+			const stats = await page.locator("#sidestats > .sidestats > dd").all();
 			const views = "👀 " + await stats[0].textContent({ timeout: 500 });
 			const faves = "🌟 " + await stats[1].locator("#faves_load").textContent({ timeout: 500 });
 			const votes = "🖐️ " + await stats[2].textContent({ timeout: 500 });
