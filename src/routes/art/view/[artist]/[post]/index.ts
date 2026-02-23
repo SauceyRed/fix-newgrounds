@@ -40,19 +40,30 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			console.log("Getting image source...");
 			const image = await page.locator(".pod-body").first().locator("a").first().getAttribute("href");
 			console.log("Image source:", image);
-			console.log("Getting score...");
-			const stats = await page.locator("dd").all();
-			const views = "👀 " + await stats[0].textContent({ timeout: 500 });
-			const faves = "🌟 " + await stats[1].locator("#faves_load").textContent({ timeout: 500 });
-			const votes = "🖐️ " + await stats[2].textContent({ timeout: 500 });
-			const score = "⭐ " + (await stats[3].locator("#score_number").textContent({ timeout: 500 })) + " / 5.00";
-			const uploaded = (await stats[4].textContent({ timeout: 500 })) + " " + (await stats[5].textContent({ timeout: 500 }));
-			const statsText = `${views} ${faves} ${votes} ${score}`;
+			
+			let uploaded: string | undefined;
+			let statsText: string | undefined;
+			try {
+				console.log("Getting post stats...");
+				const stats = await page.locator("dd").all();
+				const views = "👀 " + await stats[0].textContent({ timeout: 500 });
+				const faves = "🌟 " + await stats[1].locator("#faves_load").textContent({ timeout: 500 });
+				const votes = "🖐️ " + await stats[2].textContent({ timeout: 500 });
+				const score = "⭐ " + (await stats[3].locator("#score_number").textContent({ timeout: 500 })) + " / 5.00";
+				uploaded = (await stats[4].textContent({ timeout: 500 })) + " " + (await stats[5].textContent({ timeout: 500 }));
+				statsText = `${views} ${faves} ${votes} ${score}`;
+			} catch (error) {
+				console.error("Post stats missing");
+			}
 			
 			let description = "";
 			if (comments) {
-				description = `${comments}\n\n${statsText}`;
-			} else {
+				if (statsText) {
+					description = `${comments}\n\n${statsText}`;
+				} else {
+					description = comments;
+				}
+			} else if (statsText) {
 				description = statsText;
 			}
 
