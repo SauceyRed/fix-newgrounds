@@ -6,7 +6,11 @@ import oembed from "./routes/oembed.js";
 import { chromium } from "playwright";
 
 export const browserContext = await chromium.launchPersistentContext("profile",
-	{ headless: true, userAgent: "FixNewgroundsBot/1.0 (+https://fixnewgrounds.com; mailto:contact@fixnewgrounds.com)" }
+	{
+		headless: true,
+		userAgent: "FixNewgroundsBot/1.0 (+https://fixnewgrounds.com; mailto:contact@fixnewgrounds.com)",
+		channel: "chrome",
+	}
 );
 
 async function main() {
