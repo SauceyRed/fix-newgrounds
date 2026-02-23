@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import { createReadStream } from "node:fs";
 import { chromium } from "playwright";
 import { browserContext } from "../../../../../index.js";
+import { configDotenv } from "dotenv";
 
 export default async (fastify: FastifyInstance, options: Object) => {
 	fastify.get("/art/view/:artist/:post", async (request, reply) => {
