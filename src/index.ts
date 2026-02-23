@@ -24,7 +24,7 @@ async function main() {
 	fastify.register(oembed);
 
 	try {
-		await fastify.listen({ port: 7854 });
+		await fastify.listen({ port: 7854, host: "0.0.0.0" });
 	} catch (error) {
 		fastify.log.error(error);
 		process.exit(1);
