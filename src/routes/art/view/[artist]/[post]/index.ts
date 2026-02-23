@@ -61,7 +61,9 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			}
 
 			console.log("oembed url:", `${request.protocol}://${request.host}${path.split("?")[0]}/oembed.json`);
-			const oembedUrl = new URL(`${request.protocol}://${request.host}/oembed`);
+			configDotenv();
+			const baseUrl = process.env.BASE_URL;
+			const oembedUrl = new URL("oembed", baseUrl);
 			if (author) oembedUrl.searchParams.set("title", author.toLowerCase());
 			if (pageUrl) oembedUrl.searchParams.set("url", authorUrl);
 			console.log("actual oembed url:", oembedUrl);
