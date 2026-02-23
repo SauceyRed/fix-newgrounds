@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-	"signin": "pnpm build && node dist/setup.js",
+    "signin": "pnpm build && node dist/setup.js",
     "start": "pnpm build && node ."
   },
   "keywords": [],
@@ -15,10 +15,13 @@
   "packageManager": "pnpm@10.9.0",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.21"
+    "@types/node": "^22.15.21",
+    "@types/turndown": "^5.0.6",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "fastify": "^5.3.3",
-    "playwright": "^1.52.0"
+    "playwright": "^1.52.0",
+    "turndown": "^7.2.2"
   }
 }

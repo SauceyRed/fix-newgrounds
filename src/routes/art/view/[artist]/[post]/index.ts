@@ -2,6 +2,7 @@ import { FastifyInstance } from "fastify";
 import { createReadStream } from "node:fs";
 import { chromium } from "playwright";
 import { browserContext } from "../../../../../index.js";
+import htmlToMarkdown from "../../../../../utils/htmlToMarkdown.js";
 
 export default async (fastify: FastifyInstance, options: Object) => {
 	fastify.get("/art/view/:artist/:post", async (request, reply) => {
@@ -32,7 +33,11 @@ export default async (fastify: FastifyInstance, options: Object) => {
 			console.log("Getting author comments...");
 			let comments;
 			try {
-				comments = await page.locator("#author_comments").textContent({ timeout: 500 });
+				const authorComments = await page.locator("#author_comments").innerHTML({ timeout: 500 });
+				console.log("AUTHOR COMMENTS:", authorComments);
+				const turndowned = htmlToMarkdown(authorComments);
+				console.log("AUTHOR COMMENTS TURNDOWNED:", turndowned);
+				comments = turndowned;
 			} catch (error) {
 				fastify.log.error("Failed to get author comments:", error);
 			}
