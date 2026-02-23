@@ -13,7 +13,7 @@ export default async (fastify: FastifyInstance, options: Object) => {
 		const pageUrl = `https://www.newgrounds.com${path}`;
 
 		if (!request.headers["user-agent"]?.includes("Discordbot")) {
-			//return await reply.redirect(pageUrl);
+			return await reply.redirect(pageUrl);
 		}
 		
 		const startTime = Date.now();
